@@ -284,7 +284,3 @@ This project is licensed under the MIT License.
 
 ## 🙏 Acknowledgments
 
-- Express.js 
-- Sequelize ORM 
-- TypeScript 
-- Jest testing framework 
