@@ -10,37 +10,50 @@ import {
   ColorPicker, 
   Space, 
   Empty,
-  Tooltip 
+  Tooltip
 } from 'antd';
 import { EditOutlined, DeleteOutlined, PlusOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
 import type { Category } from '../types';
 import { useTodo } from '../contexts/TodoContext';
 import Swal from 'sweetalert2';
 
+// Interface untuk form data kategori
+interface CategoryFormData {
+  name: string;
+  color: string;
+}
+
 const CategoryManager: React.FC = () => {
   const [form] = Form.useForm();
   const [modalVisible, setModalVisible] = useState(false);
   const [editingCategory, setEditingCategory] = useState<Category | null>(null);
+  const [loading, setLoading] = useState(false);
   const { categories, createCategory, updateCategory, deleteCategory, todos } = useTodo();
 
   const handleSubmit = async () => {
     try {
+      setLoading(true);
       const values = await form.validateFields();
       
+      const categoryData: CategoryFormData = {
+        name: values.name.trim(),
+        color: typeof values.color === 'string' ? values.color : values.color.toHexString()
+      };
+
       if (editingCategory) {
-        await updateCategory(editingCategory.id, values);
+        await updateCategory(editingCategory.id, categoryData);
         Swal.fire({
           title: 'Berhasil!',
-          text: `Kategori "${values.name}" berhasil diupdate`,
+          text: `Kategori "${categoryData.name}" berhasil diupdate`,
           icon: 'success',
           timer: 1500,
           showConfirmButton: false
         });
       } else {
-        await createCategory(values);
+        await createCategory(categoryData);
         Swal.fire({
           title: 'Berhasil!',
-          text: `Kategori "${values.name}" berhasil dibuat`,
+          text: `Kategori "${categoryData.name}" berhasil dibuat`,
           icon: 'success',
           timer: 1500,
           showConfirmButton: false
@@ -51,12 +64,32 @@ const CategoryManager: React.FC = () => {
       setModalVisible(false);
       setEditingCategory(null);
     } catch (error: any) {
-      Swal.fire({
-        title: 'Error!',
-        text: error.response?.data?.message || 'Gagal menyimpan kategori',
-        icon: 'error',
-        confirmButtonColor: '#ff4d4f',
-      });
+      console.error('Error saving category:', error);
+      
+      // Handle validation errors differently from API errors
+      if (error.errorFields) {
+        // This is a form validation error
+        Swal.fire({
+          title: 'Form Tidak Valid',
+          text: 'Harap periksa kembali data yang dimasukkan',
+          icon: 'warning',
+          confirmButtonColor: '#ff4d4f',
+        });
+      } else {
+        // This is an API error
+        const errorMessage = error.response?.data?.message || 
+                           error.message || 
+                           'Gagal menyimpan kategori';
+        
+        Swal.fire({
+          title: 'Error!',
+          text: errorMessage,
+          icon: 'error',
+          confirmButtonColor: '#ff4d4f',
+        });
+      }
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -78,7 +111,10 @@ const CategoryManager: React.FC = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         setEditingCategory(category);
-        form.setFieldsValue(category);
+        form.setFieldsValue({
+          name: category.name,
+          color: category.color
+        });
         setModalVisible(true);
       }
     });
@@ -94,7 +130,7 @@ const CategoryManager: React.FC = () => {
         html: `
           <div style="text-align: left;">
             <p>Kategori <strong>"${category.name}"</strong> digunakan oleh <strong>${todosUsingCategory.length} todo</strong>.</p>
-            <p style="color: #ffffff; font-size: 14px; margin-top: 10px;">
+            <p style="color: #ff4d4f; font-size: 14px; margin-top: 10px;">
               ⚠️ Pindahkan todo ke kategori lain terlebih dahulu sebelum menghapus kategori ini.
             </p>
             ${todosUsingCategory.length > 0 ? `
@@ -136,6 +172,7 @@ const CategoryManager: React.FC = () => {
 
     if (result.isConfirmed) {
       try {
+        setLoading(true);
         await deleteCategory(category.id);
         await Swal.fire({
           title: 'Terhapus!',
@@ -145,12 +182,18 @@ const CategoryManager: React.FC = () => {
           showConfirmButton: false
         });
       } catch (error: any) {
+        const errorMessage = error.response?.data?.message || 
+                           error.message || 
+                           'Gagal menghapus kategori';
+        
         await Swal.fire({
           title: 'Error!',
-          text: error.response?.data?.message || 'Gagal menghapus kategori',
+          text: errorMessage,
           icon: 'error',
           confirmButtonColor: '#ff4d4f',
         });
+      } finally {
+        setLoading(false);
       }
     }
   };
@@ -164,6 +207,18 @@ const CategoryManager: React.FC = () => {
   const getCategoryUsage = (categoryId: number) => {
     return todos.filter(todo => todo.category_id === categoryId).length;
   };
+
+  // Warna preset untuk ColorPicker
+  const colorPresets = [
+    {
+      label: 'Warna Recommended',
+      colors: [
+        '#1890ff', '#52c41a', '#faad14', '#f5222d',
+        '#722ed1', '#eb2f96', '#13c2c2', '#a0d911',
+        '#fa8c16', '#eb2f96', '#2f54eb', '#fa541c'
+      ],
+    },
+  ];
 
   return (
     <>
@@ -181,6 +236,7 @@ const CategoryManager: React.FC = () => {
             icon={<PlusOutlined />} 
             onClick={handleAdd}
             size="middle"
+            loading={loading}
           >
             Tambah Kategori
           </Button>
@@ -195,7 +251,7 @@ const CategoryManager: React.FC = () => {
               description="Belum ada kategori"
               image={Empty.PRESENTED_IMAGE_SIMPLE}
             >
-              <Button type="primary" onClick={handleAdd}>
+              <Button type="primary" onClick={handleAdd} loading={loading}>
                 Buat Kategori Pertama
               </Button>
             </Empty>
@@ -246,7 +302,7 @@ const CategoryManager: React.FC = () => {
                             </div>
                             <Space size={8} style={{ marginTop: '4px' }}>
                               <Tag color={category.color} style={{ border: 'none', fontSize: '11px', margin: 0 }}>
-                                {category.color}
+                                {category.color.toUpperCase()}
                               </Tag>
                               <Tag color={usageCount > 0 ? 'green' : 'default'} style={{ fontSize: '11px', margin: 0 }}>
                                 {usageCount} todo
@@ -264,6 +320,7 @@ const CategoryManager: React.FC = () => {
                             icon={<EditOutlined />} 
                             onClick={() => handleEdit(category)}
                             size="small"
+                            loading={loading}
                           >
                             <span className="mobile-hidden">Edit</span>
                           </Button>
@@ -277,7 +334,8 @@ const CategoryManager: React.FC = () => {
                             icon={<DeleteOutlined />} 
                             onClick={() => handleDelete(category)}
                             size="small"
-                            disabled={!canDelete}
+                            disabled={!canDelete || loading}
+                            loading={loading}
                           >
                             <span className="mobile-hidden">Hapus</span>
                           </Button>
@@ -289,14 +347,14 @@ const CategoryManager: React.FC = () => {
                       <div style={{ 
                         marginTop: '8px', 
                         padding: '8px 12px', 
-                        background: '#ff4d4f', 
-                        border: '1px solid #ff4d4f',
+                        background: '#fff2f0', 
+                        border: '1px solid #ffccc7',
                         borderRadius: '6px',
                         fontSize: '12px',
-                        color: '#ffffff', // TEXT PUTIH
+                        color: '#a8071a',
                         fontWeight: '500'
                       }}>
-                        <ExclamationCircleOutlined style={{ marginRight: '4px', color: '#ffffff' }} />
+                        <ExclamationCircleOutlined style={{ marginRight: '4px', color: '#a8071a' }} />
                         Kategori ini digunakan oleh {usageCount} todo. Pindahkan todo ke kategori lain untuk menghapus.
                       </div>
                     )}
@@ -328,52 +386,61 @@ const CategoryManager: React.FC = () => {
         onOk={handleSubmit}
         okText={editingCategory ? 'Update' : 'Simpan'}
         cancelText="Batal"
-        destroyOnClose={false}
+        confirmLoading={loading}
+        destroyOnClose={true}
         styles={{
           body: { padding: '20px 0' }
         }}
         width={500}
       >
-        <Form form={form} layout="vertical">
+        <Form 
+          form={form} 
+          layout="vertical"
+          initialValues={{
+            color: '#1890ff'
+          }}
+        >
           <Form.Item
             name="name"
-            label={<span style={{ color: '#333333' }}>Nama Kategori</span>}
+            label={<span style={{ color: '#333333', fontWeight: 500 }}>Nama Kategori</span>}
             rules={[
               { required: true, message: 'Masukkan nama kategori' },
               { min: 2, message: 'Nama kategori minimal 2 karakter' },
-              { max: 20, message: 'Nama kategori maksimal 20 karakter' }
+              { max: 20, message: 'Nama kategori maksimal 20 karakter' },
+              {
+                validator: (_, value) => {
+                  if (value && value.trim().length === 0) {
+                    return Promise.reject(new Error('Nama kategori tidak boleh hanya spasi'));
+                  }
+                  return Promise.resolve();
+                }
+              }
             ]}
+            validateTrigger={['onChange', 'onBlur']}
           >
             <Input 
               placeholder="Contoh: Work, Personal, Shopping..." 
               size="large"
+              maxLength={20}
+              showCount
             />
           </Form.Item>
           
           <Form.Item
             name="color"
-            label={<span style={{ color: '#333333' }}>Warna Kategori</span>}
+            label={<span style={{ color: '#333333', fontWeight: 500 }}>Warna Kategori</span>}
             rules={[{ required: true, message: 'Pilih warna untuk kategori' }]}
-            initialValue="#1890ff"
           >
             <ColorPicker
               showText
               format="hex"
-              presets={[
-                {
-                  label: 'Warna Recommended',
-                  colors: [
-                    '#1890ff', '#52c41a', '#faad14', '#f5222d',
-                    '#722ed1', '#eb2f96', '#13c2c2', '#a0d911',
-                    '#fa8c16', '#eb2f96', '#2f54eb', '#fa541c'
-                  ],
-                },
-              ]}
+              presets={colorPresets}
               panelRender={(_, { components: { Presets } }) => (
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
                   <Presets />
                 </div>
               )}
+              size="large"
             />
           </Form.Item>
         </Form>

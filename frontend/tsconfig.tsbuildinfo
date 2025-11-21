@@ -1,0 +1,1 @@
+{"root":["./src/app.tsx","./src/main.tsx","./src/components/categorymanager.tsx","./src/components/pagination.tsx","./src/components/searchbar.tsx","./src/components/todoform.tsx","./src/components/todolist.tsx","./src/contexts/todocontext.tsx","./src/services/api.ts","./src/types/index.ts"],"version":"5.9.3"}
