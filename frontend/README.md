@@ -5,17 +5,22 @@ Aplikasi Todo List frontend dibangun dengan React, TypeScript, dan Ant Design. A
 ## 🎥 Demo Aplikasi
 
 <div align="center">
-  <iframe 
-    src="https://drive.google.com/file/d/1I1hRs4QGZl5f-Uiy1NgUhKyIF38dHu5E/preview" 
-    width="800" 
-    height="450" 
-    frameborder="0" 
-    allowfullscreen
-    title="Demo Todo App">
-  </iframe>
-  
-  <p><em>Video demo menunjukkan fitur-fitur utama aplikasi termasuk operasi CRUD, filtering, dan desain responsif</em></p>
+
+**📹 VIDEO DEMO: [Klik di sini untuk menonton demo aplikasi](https://drive.google.com/file/d/1I1hRs4QGZl5f-Uiy1NgUhKyIF38dHu5E/view)**
+
+<img src="https://img.icons8.com/color/96/000000/video.png" alt="Video Icon" width="64"/>
+<br>
+*Klik link di atas untuk membuka video demo di Google Drive*
+
 </div>
+
+**Deskripsi Video:**
+Video demo menunjukkan fitur-fitur utama aplikasi termasuk:
+- ✅ Operasi CRUD (Buat, Baca, Update, Hapus) todo
+- 🏷️ Manajemen kategori dengan warna kustom
+- 🔍 Filtering dan pencarian real-time
+- 📱 Desain responsif di berbagai ukuran layar
+- ⚡ Update data secara real-time
 
 ## ✨ Fitur Utama
 
@@ -61,11 +66,6 @@ Aplikasi akan berjalan di `http://localhost:5173`
 ```bash
 # Build aplikasi untuk production
 npm run build
-
-# Untuk preview build production, gunakan:
-npx vite preview
-# atau
-npm run dev  # Untuk development mode
 ```
 
 ## 🏗️ Struktur Project
@@ -263,47 +263,7 @@ Manajemen state menggunakan React built-in hooks:
 - `useEffect` untuk side effects dan API calls
 - Props drilling untuk berbagi data antar komponen
 
-## ⚠️ Pemecahan Masalah
 
-### Error Ant Design Deprecation
-```typescript
-// Perbaikan untuk warning deprecated:
-
-// 1. Ganti Input dengan addonAfter:
-// SEBELUM:
-<Input addonAfter={addon} />
-
-// SESUDAH:
-<Space.Compact>
-  <Input />
-  {addon}
-</Space.Compact>
-
-// 2. Ganti Modal destroyOnClose:
-// SEBELUM:
-<Modal destroyOnClose />
-
-// SESUDAH:
-<Modal destroyOnHide />
-
-// 3. Ganti Card bodyStyle:
-// SEBELUM:
-<Card bodyStyle={{ padding: 0 }} />
-
-// SESUDAH:
-<Card styles={{ body: { padding: 0 } }} />
-```
-
-### Error API 400 (Bad Request)
-1. **Pastikan backend API berjalan** di `http://localhost:5000`
-2. **Check koneksi database** PostgreSQL di backend
-3. **Jalankan database migrations** di backend:
-```bash
-cd backend
-npm run migrate:up
-```
-4. **Verifikasi data yang dikirim** ke API sesuai dengan schema
-5. **Periksa required fields** saat membuat kategori/todo
 
 ### Error React Version Compatibility
 ```bash
@@ -328,18 +288,6 @@ npm install
 5. **Pastikan backend server berjalan** sebelum frontend
 6. **Hubungi**: stevcomp58@gmail.com jika ada error yang tidak bisa diselesaikan
 
-### Script yang Tersedia
-```json
-{
-  "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build",
-    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
-  }
-}
-```
-
 ## 🛠️ Development
 
 ```bash
@@ -348,29 +296,9 @@ npm run dev
 
 # Build production
 npm run build
-
-# Preview build production
-npm run preview
-# atau
-npx vite preview
 ```
 
 ## 🔧 Perbaikan Umum
-
-### Jika npm run preview tidak ada:
-1. Tambahkan script di package.json:
-```json
-{
-  "scripts": {
-    "preview": "vite preview"
-  }
-}
-```
-
-2. Atau gunakan langsung:
-```bash
-npx vite preview --port 4173
-```
 
 ### Untuk error CORS:
 1. Pastikan backend mengizinkan origin frontend
@@ -385,4 +313,5 @@ npx vite preview --port 4173
 
 **Catatan**: 
 1. Pastikan backend server berjalan di port 5000 sebelum menjalankan frontend aplikasi
-2. Untuk masalah teknis yang tidak terselesaikan, silakan hubungi: stevcomp58@gmail.com
+2. Video demo dapat diakses melalui link Google Drive di atas
+3. Untuk masalah teknis, silakan hubungi: stevcomp58@gmail.com
