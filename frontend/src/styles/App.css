@@ -1,0 +1,501 @@
+/* Reset and Base Styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  min-height: 100vh;
+  color: #333333;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+/* Layout Improvements */
+.app-layout {
+  min-height: 100vh;
+  background: transparent;
+}
+
+.app-header {
+  background: #ffffff !important;
+  border-bottom: 1px solid #e8e8e8;
+  padding: 0 24px !important;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.app-content {
+  padding: 24px !important;
+  background: transparent;
+}
+
+/* Card and Container Styles - WHITE BACKGROUND */
+.app-card {
+  background: #ffffff !important;
+  border: 1px solid #e8e8e8 !important;
+  border-radius: 12px !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
+  transition: all 0.3s ease;
+  color: #333333 !important;
+}
+
+.app-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12) !important;
+}
+
+/* Text Colors - BLACK TEXT */
+.app-card .ant-card-head-title {
+  color: #333333 !important;
+  font-weight: 600;
+}
+
+.app-card .ant-typography {
+  color: #333333 !important;
+}
+
+.app-card .ant-list-item {
+  color: #333333 !important;
+}
+
+.app-card .ant-tag {
+  color: #333333 !important;
+}
+
+/* ============================ */
+/* WARNA EDIT DAN HAPUS - #EF4444 */
+/* ============================ */
+
+/* Tombol Edit - Warna Biru */
+.ant-btn-primary[class*="Edit"],
+.ant-btn[class*="edit"] .anticon-edit,
+.ant-btn .anticon-edit {
+  color: #3B82F6 !important;
+  border-color: #3B82F6 !important;
+}
+
+.ant-btn-primary[class*="Edit"]:hover,
+.ant-btn[class*="edit"]:hover .anticon-edit,
+.ant-btn:hover .anticon-edit {
+  color: #2563EB !important;
+  border-color: #2563EB !important;
+}
+
+/* Tombol Hapus - Warna #EF4444 */
+.ant-btn-danger,
+.ant-btn[class*="Delete"],
+.ant-btn[class*="delete"],
+.ant-btn .anticon-delete {
+  color: #EF4444 !important;
+  border-color: #EF4444 !important;
+  background: transparent !important;
+}
+
+.ant-btn-danger:hover,
+.ant-btn[class*="Delete"]:hover,
+.ant-btn[class*="delete"]:hover,
+.ant-btn:hover .anticon-delete {
+  color: #DC2626 !important;
+  border-color: #DC2626 !important;
+  background: transparent !important;
+}
+
+/* SweetAlert Colors - #EF4444 */
+.swal2-confirm.swal2-default {
+  background: #3B82F6 !important;
+  border-color: #3B82F6 !important;
+}
+
+.swal2-confirm.swal2-danger {
+  background: #EF4444 !important;
+  border-color: #EF4444 !important;
+}
+
+.swal2-deny,
+.swal2-cancel {
+  background: #6B7280 !important;
+  border-color: #6B7280 !important;
+}
+
+/* Warning Message Background - #EF4444 */
+.ant-alert-error,
+.ant-message-error,
+.warning-message,
+[style*="background: #ff4d4f"],
+[style*="background:#ff4d4f"],
+[style*="background: #EF4444"],
+[style*="background:#EF4444"] {
+  background: #EF4444 !important;
+  border-color: #EF4444 !important;
+  color: #ffffff !important;
+}
+
+/* Priority color indicators */
+.priority-high {
+  color: #EF4444 !important;
+}
+
+.priority-medium {
+  color: #fa8c16 !important;
+}
+
+.priority-low {
+  color: #52c41a !important;
+}
+
+/* SweetAlert2 Custom Styles */
+.sweet-alert-popup {
+  border-radius: 12px !important;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15) !important;
+  border: 1px solid #e8e8e8 !important;
+  background: #ffffff !important;
+}
+
+.swal2-title {
+  font-size: 1.4em !important;
+  font-weight: 600 !important;
+  color: #333333 !important;
+}
+
+.swal2-html-container {
+  font-size: 14px !important;
+  color: #666666 !important;
+  line-height: 1.5 !important;
+}
+
+.swal2-confirm {
+  border-radius: 6px !important;
+  padding: 8px 20px !important;
+  font-weight: 500 !important;
+  border: none !important;
+}
+
+.swal2-cancel {
+  border-radius: 6px !important;
+  padding: 8px 20px !important;
+  font-weight: 500 !important;
+  background: #f5f5f5 !important;
+  border: 1px solid #d9d9d9 !important;
+  color: #333333 !important;
+}
+
+/* Form Styles */
+.ant-form-item-label > label {
+  color: #333333 !important;
+  font-weight: 500;
+}
+
+.ant-input, .ant-select-selector, .ant-picker {
+  border-radius: 6px !important;
+  border: 1px solid #d9d9d9 !important;
+}
+
+.ant-input:focus, .ant-select-focused .ant-select-selector, .ant-picker-focused {
+  border-color: #3B82F6 !important;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2) !important;
+}
+
+/* Button Improvements */
+.ant-btn {
+  border-radius: 6px !important;
+  font-weight: 500;
+}
+
+.ant-btn-primary {
+  background: #3B82F6 !important;
+  border-color: #3B82F6 !important;
+}
+
+.ant-btn-primary:hover {
+  background: #2563EB !important;
+  border-color: #2563EB !important;
+}
+
+.ant-btn-danger {
+  background: #EF4444 !important;
+  border-color: #EF4444 !important;
+}
+
+.ant-btn-danger:hover {
+  background: #DC2626 !important;
+  border-color: #DC2626 !important;
+}
+
+/* Tag Styles */
+.ant-tag {
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
+  border: none;
+}
+
+/* Empty State */
+.ant-empty {
+  color: #8c8c8c !important;
+}
+
+.ant-empty-description {
+  color: #8c8c8c !important;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .app-header {
+    padding: 0 16px !important;
+  }
+  
+  .app-content {
+    padding: 16px !important;
+  }
+  
+  .mobile-hidden {
+    display: none !important;
+  }
+  
+  .ant-card-body {
+    padding: 16px !important;
+  }
+  
+  .todo-item .ant-card-body {
+    padding: 12px !important;
+  }
+}
+
+@media (max-width: 576px) {
+  .swal2-popup {
+    width: 90% !important;
+    margin: 20px auto !important;
+  }
+  
+  .swal2-actions {
+    flex-direction: column !important;
+    gap: 8px !important;
+  }
+  
+  .swal2-confirm,
+  .swal2-cancel {
+    width: 100% !important;
+    margin: 0 !important;
+  }
+  
+  .ant-list-item {
+    flex-direction: column;
+    align-items: flex-start !important;
+  }
+  
+  .ant-list-item-action {
+    margin-left: 0 !important;
+    margin-top: 12px;
+    width: 100%;
+  }
+  
+  .ant-list-item-action > * {
+    width: 100%;
+    margin-bottom: 8px;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
+/* Loading states */
+.ant-spin-nested-loading {
+  min-height: 200px;
+}
+
+.ant-spin-container {
+  color: #333333 !important;
+}
+
+/* Modal improvements */
+.ant-modal-content {
+  border-radius: 12px !important;
+  background: #ffffff !important;
+}
+
+.ant-modal-header {
+  border-radius: 12px 12px 0 0 !important;
+  background: #ffffff !important;
+  border-bottom: 1px solid #e8e8e8;
+}
+
+.ant-modal-title {
+  color: #333333 !important;
+  font-weight: 600;
+}
+
+.ant-modal-close {
+  color: #666666 !important;
+}
+
+.ant-modal-close:hover {
+  color: #333333 !important;
+}
+
+/* Tabs improvements */
+.ant-tabs-tab {
+  color: #666666 !important;
+  font-weight: 500;
+}
+
+.ant-tabs-tab-active {
+  color: #3B82F6 !important;
+}
+
+.ant-tabs-ink-bar {
+  background: #3B82F6 !important;
+}
+
+/* Category color dots */
+.color-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 8px;
+}
+
+/* Overdue warning */
+.overdue-warning {
+  background: #FEF2F2 !important;
+  border: 1px solid #FECACA !important;
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-size: 12px;
+  color: #EF4444 !important;
+}
+
+/* Success states */
+.success-state {
+  background: #f6ffed;
+  border: 1px solid #b7eb8f;
+  border-radius: 6px;
+  padding: 8px 12px;
+  color: #389e0d;
+}
+
+/* Animation for new items */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.todo-item {
+  animation: fadeIn 0.3s ease;
+}
+
+/* Pagination improvements */
+.ant-pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 24px;
+}
+
+.ant-pagination-item {
+  border-radius: 6px !important;
+}
+
+.ant-pagination-item-active {
+  border-color: #3B82F6 !important;
+}
+
+.ant-pagination-item-active a {
+  color: #3B82F6 !important;
+}
+
+/* Search and Filter improvements */
+.ant-input-search {
+  border-radius: 8px !important;
+}
+
+.ant-input-search .ant-input {
+  border-radius: 8px 0 0 8px !important;
+}
+
+.ant-input-search .ant-input-group-addon {
+  border-radius: 0 8px 8px 0 !important;
+}
+
+/* Select dropdown improvements */
+.ant-select-dropdown {
+  border-radius: 8px !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+}
+
+.ant-select-item {
+  color: #333333 !important;
+}
+
+.ant-select-item-option-selected {
+  background: #f0f8ff !important;
+  color: #3B82F6 !important;
+}
+
+/* Date picker improvements */
+.ant-picker-panel {
+  border-radius: 8px !important;
+}
+
+.ant-picker-cell-in-view {
+  color: #333333 !important;
+}
+
+.ant-picker-cell-selected .ant-picker-cell-inner {
+  background: #3B82F6 !important;
+  color: #ffffff !important;
+}
+
+/* ============================ */
+/* SPESIFIC SELECTOR UNTUK WARNING MESSAGE */
+/* ============================ */
+
+/* Target khusus untuk warning message di kategori manager */
+.ant-card .ant-card-body div[style*="background"] div,
+.ant-card .ant-card-body > div > div:last-child {
+  color: #ffffff !important;
+}
+
+.ant-card .ant-card-body div[style*="ff4d4f"],
+.ant-card .ant-card-body div[style*="EF4444"] {
+  background: #EF4444 !important;
+  border-color: #EF4444 !important;
+  color: #ffffff !important;
+}
+
+.ant-card .ant-card-body div[style*="ff4d4f"] .anticon,
+.ant-card .ant-card-body div[style*="EF4444"] .anticon {
+  color: #ffffff !important;
+}
