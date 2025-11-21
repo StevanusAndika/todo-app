@@ -325,15 +325,12 @@ interface FilterState {
 backend/
 ├── src/
 │   ├── config/         # Konfigurasi database & environment
-│   ├── controllers/    # Logic bisnis
+│   ├── migrations/     # Migrasi database
 │   ├── models/         # Model database
 │   ├── routes/         # Rute API
-│   ├── middleware/     # Middleware kustom
-│   ├── utils/          # Fungsi utility
-│   └── app.ts         # Inisialisasi aplikasi
-├── migrations/         # Migrasi database
-├── tests/             # Unit tests
-└── package.json
+│   ├── tests/          # Unit testing
+│   └── app.ts          # Inisialisasi aplikasi
+└── package.json        # load paket dan dependesi
 ```
 
 **Penanganan Error:**
@@ -401,7 +398,6 @@ const Todo = sequelize.define('Todo', {
 **Functions/Methods yang Di-test:**
 - Endpoints API (GET, POST, PUT, DELETE)
 - Operasi database (create, read, update, delete)
-- Layanan business logic
 - Fungsi utility
 
 **Struktur Test:**
