@@ -264,8 +264,8 @@ CREATE INDEX idx_todos_due_date ON todos(due_date);
 /* Perangkat medium (tablets, 768px ke atas) */
 @media (min-width: 768px) { ... }
 
-/* Perangkat besar (desktops, 992px ke atas) */
-@media (min-width: 992px) { ... }
+
+
 ```
 
 **Adaptasi UI:**
