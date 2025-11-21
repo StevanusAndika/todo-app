@@ -62,7 +62,8 @@ Aplikasi akan berjalan di `http://localhost:5173`
 # Build aplikasi untuk production
 npm run build
 
-
+# Untuk preview build production, gunakan:
+npx vite preview
 # atau
 npm run dev  # Untuk development mode
 ```
@@ -262,18 +263,82 @@ Manajemen state menggunakan React built-in hooks:
 - `useEffect` untuk side effects dan API calls
 - Props drilling untuk berbagi data antar komponen
 
+## ⚠️ Pemecahan Masalah
 
+### Error Ant Design Deprecation
+```typescript
+// Perbaikan untuk warning deprecated:
 
+// 1. Ganti Input dengan addonAfter:
+// SEBELUM:
+<Input addonAfter={addon} />
+
+// SESUDAH:
+<Space.Compact>
+  <Input />
+  {addon}
+</Space.Compact>
+
+// 2. Ganti Modal destroyOnClose:
+// SEBELUM:
+<Modal destroyOnClose />
+
+// SESUDAH:
+<Modal destroyOnHide />
+
+// 3. Ganti Card bodyStyle:
+// SEBELUM:
+<Card bodyStyle={{ padding: 0 }} />
+
+// SESUDAH:
+<Card styles={{ body: { padding: 0 } }} />
+```
+
+### Error API 400 (Bad Request)
+1. **Pastikan backend API berjalan** di `http://localhost:5000`
+2. **Check koneksi database** PostgreSQL di backend
+3. **Jalankan database migrations** di backend:
+```bash
+cd backend
+npm run migrate:up
+```
+4. **Verifikasi data yang dikirim** ke API sesuai dengan schema
+5. **Periksa required fields** saat membuat kategori/todo
+
+### Error React Version Compatibility
+```bash
+# Periksa versi React yang terinstall
+npm list react react-dom
+
+# Jika perlu downgrade ke React 18:
+npm install react@^18.2.0 react-dom@^18.2.0
+```
 
 ## 📞 Troubleshooting Lainnya
 
 Jika mengalami masalah:
-1. Periksa console browser untuk pesan error
-2. Pastikan semua dependencies ter-install dengan benar
-3. Verifikasi environment variables sudah sesuai
-4. Restart development server jika diperlukan
-5. Pastikan backend server berjalan sebelum frontend
-6. Hubungi stevcomp58@gmail jika ada error yang tidak bisa diselesaikan
+
+1. **Periksa console browser** untuk pesan error detail
+2. **Pastikan semua dependencies** ter-install dengan benar:
+```bash
+npm install
+```
+3. **Verifikasi environment variables** sudah sesuai
+4. **Restart development server** jika diperlukan
+5. **Pastikan backend server berjalan** sebelum frontend
+6. **Hubungi**: stevcomp58@gmail.com jika ada error yang tidak bisa diselesaikan
+
+### Script yang Tersedia
+```json
+{
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview"
+  }
+}
+```
 
 ## 🛠️ Development
 
@@ -284,7 +349,9 @@ npm run dev
 # Build production
 npm run build
 
-# Preview build production (jika tersedia)
+# Preview build production
+npm run preview
+# atau
 npx vite preview
 ```
 
@@ -302,13 +369,20 @@ npx vite preview
 
 2. Atau gunakan langsung:
 ```bash
-npx vite preview
+npx vite preview --port 4173
 ```
 
-### Untuk error React version:
-- Pastikan menggunakan React 18.x
-- Check compatibility Ant Design dengan versi React
+### Untuk error CORS:
+1. Pastikan backend mengizinkan origin frontend
+2. Check CORS configuration di backend
+
+### Untuk error koneksi database:
+1. Pastikan PostgreSQL berjalan
+2. Check connection string di backend
+3. Verifikasi migrations sudah dijalankan
 
 ---
 
-**Catatan**: Pastikan backend server berjalan di port 5000 sebelum menjalankan frontend aplikasi.
+**Catatan**: 
+1. Pastikan backend server berjalan di port 5000 sebelum menjalankan frontend aplikasi
+2. Untuk masalah teknis yang tidak terselesaikan, silakan hubungi: stevcomp58@gmail.com

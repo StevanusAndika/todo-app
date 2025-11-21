@@ -78,7 +78,6 @@ npm run dev
 
 # Production mode
 npm run build
-npm start
 ```
 
 Backend akan berjalan di `http://localhost:5000`
@@ -98,7 +97,7 @@ VITE_API_BASE_URL=http://localhost:5000/api
 VITE_APP_TITLE=Todo App
 ```
 
-#### 3.3 Jalankan Frontend
+#### 3.3 Jalankan Frontend(development)
 ```bash
 npm run dev
 ```
@@ -285,16 +284,13 @@ CREATE INDEX idx_todos_due_date ON todos(due_date);
 **Component Hierarchy:**
 ```
 App
-├── Layout
-│   ├── Sidebar
-│   └── MainContent
-├── TodoManagement
-│   ├── TodoList
-│   ├── TodoForm
-│   └── TodoFilters
-└── CategoryManagement
-    ├── CategoryList
-    └── CategoryForm
+├── Components
+│   ├── CategoryManager
+│   └── Pagination
+│   └── SearchBar
+│   └── TodoForm
+│   └── TodoList
+  
 ```
 
 **State Management:**
