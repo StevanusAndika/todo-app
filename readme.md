@@ -1,31 +1,31 @@
-# Todo App - Fullstack Application
+# Todo App - Aplikasi Fullstack
 
 Aplikasi Todo List lengkap dengan backend API (Node.js + Express + TypeScript) dan frontend (React + TypeScript + Ant Design).
 
 ## 📋 Fitur yang Diimplementasikan
 
-### ✅ Backend Features
+### ✅ Fitur Backend
 - RESTful API dengan TypeScript
 - PostgreSQL dengan Sequelize ORM
-- Database migrations & seeding
-- Swagger API documentation
-- CRUD operations untuk Todos dan Categories
+- Migrasi database & seeding
+- Dokumentasi API Swagger
+- Operasi CRUD untuk Todos dan Categories
 - Filtering, sorting, dan pagination
-- Error handling yang komprehensif
+- Penanganan error yang komprehensif
 - Unit testing dengan Jest
 
-### ✅ Frontend Features
+### ✅ Fitur Frontend
 - React 19 dengan TypeScript
-- Responsive design dengan Ant Design
-- CRUD operations real-time
-- Filtering by status, kategori, dan prioritas
+- Desain responsif dengan Ant Design
+- Operasi CRUD real-time
+- Filter berdasarkan status, kategori, dan prioritas
 - Pencarian todos
-- Sort by berbagai field
+- Sortir berdasarkan berbagai field
 - Konfirmasi dengan SweetAlert2
 
 ## 🚀 Panduan Setup Lengkap (Step-by-Step)
 
-### Prerequisites
+### Persyaratan
 - Node.js 18+ 
 - PostgreSQL 13+
 - npm atau yarn
@@ -66,17 +66,17 @@ PORT=5000
 NODE_ENV=development
 ```
 
-#### 2.4 Jalankan Database Migrations
+#### 2.4 Jalankan Migrasi Database
 ```bash
 npm run migrate:up
 ```
 
-#### 2.5 Jalankan Backend Server
+#### 2.5 Jalankan Server Backend
 ```bash
-# Development mode
+# Mode development
 npm run dev
 
-# Production mode
+# Mode production
 npm run build
 ```
 
@@ -97,7 +97,7 @@ VITE_API_BASE_URL=http://localhost:5000/api
 VITE_APP_TITLE=Todo App
 ```
 
-#### 3.3 Jalankan Frontend(development)
+#### 3.3 Jalankan Frontend (Development)
 ```bash
 npm run dev
 ```
@@ -108,9 +108,9 @@ Frontend akan berjalan di `http://localhost:5173`
 
 - **Frontend**: http://localhost:5173
 - **Backend API**: http://localhost:5000
-- **API Documentation**: http://localhost:5000/api-docs
+- **Dokumentasi API**: http://localhost:5000/api-docs
 
-## 🐳 Docker Setup (Alternatif)
+## 🐳 Setup Docker (Alternatif)
 
 ### Dengan Docker Compose
 ```bash
@@ -124,42 +124,42 @@ docker-compose up -d --build
 
 ## 🧪 Menjalankan Tests
 
-### Backend Tests
+### Tests Backend
 ```bash
 cd backend
-npm test              # Run semua tests
+npm test              # Jalankan semua tests
 npm run test:watch    # Watch mode
-npm run test:coverage # Dengan coverage report
+npm run test:coverage # Dengan laporan coverage
 ```
 
-### Frontend Tests
+### Tests Frontend
 ```bash
 cd frontend
 npm run dev         # Code linting
 npm run build        # Build production
 ```
 
-## 📚 API Documentation
+## 📚 Dokumentasi API
 
 ### Endpoints
 
 #### Todos
-- `GET /api/todos` - Get semua todos dengan filter & pagination
-- `GET /api/todos/:id` - Get todo by ID
-- `POST /api/todos` - Create todo baru
+- `GET /api/todos` - Dapatkan semua todos dengan filter & pagination
+- `GET /api/todos/:id` - Dapatkan todo by ID
+- `POST /api/todos` - Buat todo baru
 - `PUT /api/todos/:id` - Update todo
 - `PATCH /api/todos/:id/toggle` - Toggle status completed
-- `DELETE /api/todos/:id` - Delete todo
+- `DELETE /api/todos/:id` - Hapus todo
 
 #### Categories
-- `GET /api/categories` - Get semua categories
-- `POST /api/categories` - Create category baru
+- `GET /api/categories` - Dapatkan semua categories
+- `POST /api/categories` - Buat category baru
 - `PUT /api/categories/:id` - Update category
-- `DELETE /api/categories/:id` - Delete category
+- `DELETE /api/categories/:id` - Hapus category
 
 ### Contoh Request
 ```bash
-# Create todo
+# Buat todo
 curl -X POST http://localhost:5000/api/todos \
   -H "Content-Type: application/json" \
   -d '{
@@ -170,9 +170,9 @@ curl -X POST http://localhost:5000/api/todos \
   }'
 ```
 
-## ❓ Jawaban Technical Questions
+## ❓ Jawaban Pertanyaan Teknis
 
-### Database Design Questions
+### Pertanyaan Desain Database
 
 #### 1. Tables yang Dibuat dan Alasannya
 
@@ -207,12 +207,12 @@ CREATE TABLE todos (
 **Alasan Desain:**
 - Relasi one-to-many antara categories dan todos
 - Enum untuk priority memastikan data konsisten
-- Timestamps untuk tracking creation dan update
-- Color field untuk visual differentiation
+- Timestamps untuk melacak pembuatan dan update
+- Color field untuk pembedaan visual
 
 #### 2. Pagination dan Filtering di Database
 
-**Pagination Implementation:**
+**Implementasi Pagination:**
 ```javascript
 // Menggunakan Sequelize pagination
 const getTodos = async (page = 1, limit = 10) => {
@@ -228,7 +228,7 @@ const getTodos = async (page = 1, limit = 10) => {
 };
 ```
 
-**Filtering Queries:**
+**Query Filtering:**
 ```sql
 -- Filter by status dan kategori
 SELECT * FROM todos 
@@ -251,90 +251,92 @@ CREATE INDEX idx_todos_priority ON todos(priority);
 CREATE INDEX idx_todos_due_date ON todos(due_date);
 ```
 
-### Technical Decision Questions
+### Pertanyaan Keputusan Teknis
 
-#### 1. Responsive Design Implementation
+#### 1. Implementasi Desain Responsif
 
 **Breakpoints yang Digunakan:**
 ```css
 /* Mobile First Approach */
-/* Small devices (landscape phones, 576px and up) */
+/* Perangkat kecil (landscape phones, 576px ke atas) */
 @media (min-width: 576px) { ... }
 
-/* Medium devices (tablets, 768px and up) */
+/* Perangkat medium (tablets, 768px ke atas) */
 @media (min-width: 768px) { ... }
 
-/* Large devices (desktops, 992px and up) */
+/* Perangkat besar (desktops, 992px ke atas) */
 @media (min-width: 992px) { ... }
 ```
 
 **Adaptasi UI:**
-- Mobile: Single column, collapsed sidebar
-- Tablet: Two column layout
-- Desktop: Full layout dengan sidebar expanded
+- Mobile: Layout single column, sidebar collapsed
+- Tablet: Layout dua kolom
+- Desktop: Layout lengkap dengan sidebar expanded
 
-**Ant Design Components:**
-- `Grid` dan `Row/Col` untuk responsive layout
-- `Table` dengan responsive scroll
+**Komponen Ant Design:**
+- `Grid` dan `Row/Col` untuk layout responsif
+- `Table` dengan scroll responsif
 - `Modal` yang menyesuaikan ukuran layar
-- `Drawer` untuk mobile navigation
+- `Drawer` untuk navigasi mobile
 
-#### 2. React Component Structure
+#### 2. Struktur Komponen React
 
-**Component Hierarchy:**
+**Hierarki Komponen:**
 ```
 App
 ├── Components
 │   ├── CategoryManager
-│   └── Pagination
-│   └── SearchBar
-│   └── TodoForm
+│   ├── Pagination
+│   ├── SearchBar
+│   ├── TodoForm
 │   └── TodoList
-  
 ```
 
-**State Management:**
+**Manajemen State:**
 ```typescript
-// Centralized state dengan React hooks
-const [todos, setTodos] = useState<Todo[]>([]);
-const [filters, setFilters] = useState<FilterState>({
-  status: 'all',
-  category: null,
-  search: '',
-  sortBy: 'created_at',
-  sortOrder: 'desc'
-});
+// Centralized state dengan React Context API
+const { 
+  todos, 
+  filters, 
+  setFilters, 
+  pagination, 
+  setPagination 
+} = useTodo();
 ```
 
-**Filtering & Pagination State:**
+**State Filtering & Pagination:**
 ```typescript
 interface FilterState {
-  status: 'all' | 'active' | 'completed';
-  category: number | null;
   search: string;
-  sortBy: string;
-  sortOrder: 'asc' | 'desc';
-  page: number;
-  limit: number;
+  completed?: boolean;
+  category_id?: number;
+  priority?: string;
+  start_date?: string;
+  end_date?: string;
+  sort_by?: string;
+  sort_order?: 'asc' | 'desc';
 }
 ```
 
-#### 3. Backend Architecture
+#### 3. Arsitektur Backend
 
 **Struktur Folder:**
 ```
 backend/
 ├── src/
-│   ├── config/         # Database & environment config
-│   ├── models/         # Database models
-│   ├── routes/         # API routes
-│   └── app.ts         # App initialization
-├── migrations/         # Database migrations
+│   ├── config/         # Konfigurasi database & environment
+│   ├── controllers/    # Logic bisnis
+│   ├── models/         # Model database
+│   ├── routes/         # Rute API
+│   ├── middleware/     # Middleware kustom
+│   ├── utils/          # Fungsi utility
+│   └── app.ts         # Inisialisasi aplikasi
+├── migrations/         # Migrasi database
 ├── tests/             # Unit tests
 └── package.json
 ```
 
-**Error Handling:**
+**Penanganan Error:**
 ```javascript
 // Global error handler
 app.use((err, req, res, next) => {
@@ -353,9 +355,9 @@ app.use((err, req, res, next) => {
 });
 ```
 
-#### 4. Data Validation
+#### 4. Validasi Data
 
-**Backend Validation:**
+**Validasi Backend:**
 ```javascript
 // Menggunakan Sequelize validation
 const Todo = sequelize.define('Todo', {
@@ -376,37 +378,37 @@ const Todo = sequelize.define('Todo', {
 });
 ```
 
-**Frontend Validation:**
+**Validasi Frontend:**
 ```typescript
 // Form validation dengan Ant Design
 <Form.Item
   name="title"
-  label="Title"
+  label="Judul Todo"
   rules={[
-    { required: true, message: 'Please input todo title!' },
-    { min: 1, message: 'Title must be at least 1 character' },
-    { max: 255, message: 'Title cannot exceed 255 characters' }
+    { required: true, message: 'Masukkan judul todo!' },
+    { min: 1, message: 'Judul minimal 1 karakter' },
+    { max: 255, message: 'Judul tidak boleh lebih dari 255 karakter' }
   ]}
 >
   <Input />
 </Form.Item>
 ```
 
-### Testing & Quality Questions
+### Pertanyaan Testing & Kualitas
 
-#### 1. Unit Test Implementation
+#### 1. Implementasi Unit Test
 
 **Functions/Methods yang Di-test:**
-- API endpoints (GET, POST, PUT, DELETE)
-- Database operations (create, read, update, delete)
-- Business logic services
-- Utility functions
+- Endpoints API (GET, POST, PUT, DELETE)
+- Operasi database (create, read, update, delete)
+- Layanan business logic
+- Fungsi utility
 
-**Test Structure:**
+**Struktur Test:**
 ```javascript
 describe('Todo API', () => {
   describe('GET /api/todos', () => {
-    it('should return all todos', async () => {
+    it('seharusnya mengembalikan semua todos', async () => {
       const response = await request(app).get('/api/todos');
       expect(response.status).toBe(200);
       expect(Array.isArray(response.body.data)).toBe(true);
@@ -416,36 +418,91 @@ describe('Todo API', () => {
 ```
 
 **Edge Cases:**
-- Invalid input data
-- Non-existent resources
-- Database connection errors
-- Validation failures
+- Data input tidak valid
+- Resource yang tidak ada
+- Error koneksi database
+- Kegagalan validasi
 
 #### 2. Improvements untuk Masa Depan
 
 **Technical Debt:**
-- [ ] Implement proper logging system
-- [ ] Add rate limiting untuk API
-- [ ] Implement caching layer
-- [ ] Add database connection pooling
+- [ ] Implementasi sistem logging yang proper
+- [ ] Tambahkan rate limiting untuk API
+- [ ] Implementasi caching layer
+- [ ] Tambahkan database connection pooling
 
-**Feature Improvements:**
-- [ ] User authentication & authorization
-- [ ] File upload untuk attachments
-- [ ] Real-time updates dengan WebSocket
-- [ ] Export/import functionality
-- [ ] Advanced reporting & analytics
+**Improvement Fitur:**
+- [ ] Autentikasi user & authorization
+- [ ] Upload file untuk attachments
+- [ ] Update real-time dengan WebSocket
+- [ ] Fungsi export/import
+- [ ] Reporting & analytics lanjutan
 
-**Refactoring Opportunities:**
-- [ ] Extract common utilities ke shared package
-- [ ] Implement repository pattern untuk data access
-- [ ] Add comprehensive integration tests
-- [ ] Optimize database queries dengan advanced indexing
+**Peluang Refactoring:**
+- [ ] Ekstrak utility umum ke shared package
+- [ ] Implementasi repository pattern untuk data access
+- [ ] Tambahkan integration tests yang komprehensif
+- [ ] Optimasi query database dengan advanced indexing
+
+## 🎯 Implementasi React Context API
+
+### Struktur Context yang Diimplementasikan
+
+```typescript
+// contexts/TodoContext.tsx
+interface TodoState {
+  todos: Todo[];
+  categories: Category[];
+  loading: boolean;
+  pagination: PaginationState;
+  filters: FilterState;
+}
+
+interface TodoContextType extends TodoState {
+  // Data fetching
+  fetchTodos: () => Promise<void>;
+  fetchCategories: () => Promise<void>;
+  
+  // CRUD operations
+  addTodo: (data: TodoFormData) => Promise<void>;
+  updateTodo: (id: number, data: Partial<TodoFormData>) => Promise<void>;
+  deleteTodo: (id: number) => Promise<void>;
+  toggleTodo: (id: number) => Promise<void>;
+  
+  // State management
+  setFilters: (filters: Partial<FilterState>) => void;
+  setPagination: (pagination: Partial<PaginationState>) => void;
+  
+  // Category operations
+  createCategory: (data: { name: string; color: string }) => Promise<void>;
+  updateCategory: (id: number, data: { name: string; color: string }) => Promise<void>;
+  deleteCategory: (id: number) => Promise<void>;
+}
+```
+
+### Keunggulan Implementasi Context API:
+- ✅ **State terpusat** untuk seluruh aplikasi
+- ✅ **Type safety** dengan TypeScript
+- ✅ **Performance optimized** dengan useReducer
+- ✅ **Clean separation** antara state logic dan UI components
+- ✅ **Easy to use** dengan custom hook `useTodo()`
+
+## 🔧 Sistem Filtering Lanjutan
+
+### Fitur Filtering yang Diimplementasikan:
+- ✅ **Pencarian teks** - berdasarkan judul dan deskripsi
+- ✅ **Filter status** - semua, selesai, belum selesai
+- ✅ **Filter kategori** - pilih berdasarkan kategori
+- ✅ **Filter prioritas** - high, medium, low
+- ✅ **Filter tanggal** - range tanggal dibuat
+- ✅ **Sorting lanjutan** - berbagai opsi pengurutan
+- ✅ **Visual filter tags** - tampilkan filter aktif
+- ✅ **Clear all filters** - reset semua filter
 
 ## 📞 Support
 
 Jika mengalami masalah saat setup, silakan:
-1. Check logs di terminal untuk error messages
+1. Periksa logs di terminal untuk pesan error
 2. Pastikan PostgreSQL berjalan dan database dibuat
 3. Verifikasi environment variables sudah sesuai
 4. Buka issue di GitHub repository
@@ -455,16 +512,19 @@ Jika mengalami masalah saat setup, silakan:
 
 MIT License
 
-## 📁 File Structure
+## 📁 Struktur File
 
 ```
 todo-app/
-├── README.md                 # File ini (fullstack documentation)
+├── README.md                 # File ini (dokumentasi fullstack)
 ├── backend/
-│   ├── README.md            # Backend-specific documentation
+│   ├── README.md            # Dokumentasi spesifik backend
 │   └── ...
 ├── frontend/
-│   ├── README.md            # Frontend-specific documentation  
+│   ├── README.md            # Dokumentasi spesifik frontend  
 │   └── ...
 └── docker-compose.yml
 ```
+
+---
+
