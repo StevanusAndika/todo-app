@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Modal, Form, Input, Select, DatePicker, Button, Space, Tag } from 'antd';
 import { Todo, TodoFormData } from '../types';
 import { useTodo } from '../contexts/TodoContext';
-import moment from 'moment';
+import dayjs from 'dayjs';
 import Swal from 'sweetalert2';
 
 const { TextArea } = Input;
@@ -23,7 +23,7 @@ const TodoForm: React.FC<TodoFormProps> = ({ visible, onCancel, editingTodo }) =
       if (editingTodo) {
         form.setFieldsValue({
           ...editingTodo,
-          due_date: editingTodo.due_date ? moment(editingTodo.due_date) : undefined,
+          due_date: editingTodo.due_date ? dayjs(editingTodo.due_date) : undefined,
         });
       } else {
         form.resetFields();

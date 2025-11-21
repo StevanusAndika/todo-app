@@ -1,5 +1,5 @@
 import axios from 'axios';
-import type { Todo, TodosResponse, Category, TodoFormData } from '../types';
+import type { Todo, TodosResponse, Category, TodoFormData, FilterState } from '../types';
 
 const API_BASE_URL = 'http://localhost:5000/api';
 
@@ -11,7 +11,7 @@ const api = axios.create({
 });
 
 export const todoAPI = {
-  // Todos
+  // Todos dengan advanced filtering
   getTodos: (params?: {
     page?: number;
     limit?: number;
@@ -19,6 +19,10 @@ export const todoAPI = {
     completed?: boolean;
     category_id?: number;
     priority?: string;
+    start_date?: string;
+    end_date?: string;
+    sort_by?: string;
+    sort_order?: string;
   }): Promise<TodosResponse> => 
     api.get('/todos', { params }).then(res => res.data),
 

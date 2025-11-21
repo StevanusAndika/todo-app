@@ -1,30 +1,21 @@
 import React, { createContext, useContext, useReducer, useEffect } from 'react';
-import type { Todo, Category, TodosResponse, TodoFormData } from '../types';
+import type { Todo, Category, TodosResponse, TodoFormData, FilterState, PaginationState } from '../types';
 import { todoAPI } from '../services/api';
 
 interface TodoState {
   todos: Todo[];
   categories: Category[];
   loading: boolean;
-  pagination: {
-    current: number;
-    pageSize: number;
-    total: number;
-  };
-  filters: {
-    search: string;
-    completed?: boolean;
-    category_id?: number;
-    priority?: string;
-  };
+  pagination: PaginationState;
+  filters: FilterState;
 }
 
 type TodoAction =
   | { type: 'SET_TODOS'; payload: TodosResponse }
   | { type: 'SET_CATEGORIES'; payload: Category[] }
   | { type: 'SET_LOADING'; payload: boolean }
-  | { type: 'SET_FILTERS'; payload: Partial<TodoState['filters']> }
-  | { type: 'SET_PAGINATION'; payload: Partial<TodoState['pagination']> }
+  | { type: 'SET_FILTERS'; payload: Partial<FilterState> }
+  | { type: 'SET_PAGINATION'; payload: Partial<PaginationState> }
   | { type: 'ADD_TODO'; payload: Todo }
   | { type: 'UPDATE_TODO'; payload: Todo }
   | { type: 'DELETE_TODO'; payload: number }
@@ -41,6 +32,8 @@ const initialState: TodoState = {
   },
   filters: {
     search: '',
+    sort_by: 'created_at',
+    sort_order: 'desc',
   },
 };
 
@@ -54,6 +47,7 @@ const todoReducer = (state: TodoState, action: TodoAction): TodoState => {
           ...state.pagination,
           current: action.payload.pagination.current_page,
           total: action.payload.pagination.total,
+          pageSize: action.payload.pagination.per_page,
         },
         loading: false,
       };
@@ -104,8 +98,8 @@ interface TodoContextType extends TodoState {
   updateTodo: (id: number, data: Partial<TodoFormData>) => Promise<void>;
   deleteTodo: (id: number) => Promise<void>;
   toggleTodo: (id: number) => Promise<void>;
-  setFilters: (filters: Partial<TodoState['filters']>) => void;
-  setPagination: (pagination: Partial<TodoState['pagination']>) => void;
+  setFilters: (filters: Partial<FilterState>) => void;
+  setPagination: (pagination: Partial<PaginationState>) => void;
   createCategory: (data: { name: string; color: string }) => Promise<void>;
   updateCategory: (id: number, data: { name: string; color: string }) => Promise<void>;
   deleteCategory: (id: number) => Promise<void>;
@@ -122,7 +116,14 @@ export const TodoProvider: React.FC<{ children: React.ReactNode }> = ({ children
       const response = await todoAPI.getTodos({
         page: state.pagination.current,
         limit: state.pagination.pageSize,
-        ...state.filters,
+        search: state.filters.search,
+        completed: state.filters.completed,
+        category_id: state.filters.category_id,
+        priority: state.filters.priority,
+        start_date: state.filters.start_date,
+        end_date: state.filters.end_date,
+        sort_by: state.filters.sort_by,
+        sort_order: state.filters.sort_order,
       });
       dispatch({ type: 'SET_TODOS', payload: response });
     } catch (error) {
@@ -172,8 +173,10 @@ export const TodoProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const toggleTodo = async (id: number) => {
     try {
-      await todoAPI.toggleTodo(id);
+      const response = await todoAPI.toggleTodo(id);
       dispatch({ type: 'TOGGLE_TODO', payload: id });
+      // Refresh todos untuk mendapatkan data terbaru
+      await fetchTodos();
     } catch (error) {
       console.error('Error toggling todo:', error);
       throw error;
@@ -210,17 +213,17 @@ export const TodoProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   };
 
-  const setFilters = (filters: Partial<TodoState['filters']>) => {
+  const setFilters = (filters: Partial<FilterState>) => {
     dispatch({ type: 'SET_FILTERS', payload: filters });
   };
 
-  const setPagination = (pagination: Partial<TodoState['pagination']>) => {
+  const setPagination = (pagination: Partial<PaginationState>) => {
     dispatch({ type: 'SET_PAGINATION', payload: pagination });
   };
 
   useEffect(() => {
     fetchTodos();
-  }, [state.pagination.current, state.filters]);
+  }, [state.pagination.current, state.pagination.pageSize, state.filters]);
 
   useEffect(() => {
     fetchCategories();

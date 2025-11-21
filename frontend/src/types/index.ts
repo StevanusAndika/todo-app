@@ -37,3 +37,21 @@ export interface TodoFormData {
   priority: 'low' | 'medium' | 'high';
   due_date?: string;
 }
+
+// Tambahkan interface untuk advanced filtering
+export interface FilterState {
+  search: string;
+  completed?: boolean;
+  category_id?: number;
+  priority?: string;
+  start_date?: string;
+  end_date?: string;
+  sort_by?: string;
+  sort_order?: 'asc' | 'desc';
+}
+
+export interface PaginationState {
+  current: number;
+  pageSize: number;
+  total: number;
+}

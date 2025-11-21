@@ -6,7 +6,7 @@ Aplikasi Todo List frontend dibangun dengan React, TypeScript, dan Ant Design. A
 
 <div align="center">
 
-**📹 VIDEO DEMO: [Klik di sini untuk menonton demo aplikasi](https://drive.google.com/file/d/1I1hRs4QGZl5f-Uiy1NgUhKyIF38dHu5E/view)**
+**📹 VIDEO DEMO: [Klik di sini untuk menonton demo aplikasi](https://drive.google.com/drive/folders/1yMX7zbBaRoZKShEgTwmGBHkZm5I5ZbH1)**
 
 <img src="https://img.icons8.com/color/96/000000/video.png" alt="Video Icon" width="64"/>
 <br>
@@ -21,7 +21,7 @@ Video demo menunjukkan fitur-fitur utama aplikasi termasuk:
 - 🔍 Filtering dan pencarian real-time
 - 📱 Desain responsif di berbagai ukuran layar
 - ⚡ Update data secara real-time
-
+-  😉Context API + efficient rendering
 ## ✨ Fitur Utama
 
 - ✅ **Manajemen Todo** - Tambah, edit, hapus, dan ubah status todo
@@ -118,6 +118,8 @@ Komponen pencarian dan filtering dengan:
 - Filter berdasarkan status (semua, aktif, selesai)
 - Filter berdasarkan kategori
 - Sortir berdasarkan berbagai field
+- Advanced filtering 
+
 
 ### Pagination
 Komponen pagination untuk navigasi halaman:
