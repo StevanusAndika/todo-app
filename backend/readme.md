@@ -247,7 +247,6 @@ backend/
 ## 📦 Dependencies
 
 ### Production Dependencies
-- `bcryptjs` - Password hashing
 - `cors` - Cross-Origin Resource Sharing
 - `dotenv` - Environment variables management
 - `express` - Web framework

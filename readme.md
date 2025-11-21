@@ -1,6 +1,3 @@
-
-
-```markdown
 # Todo App - Fullstack Application
 
 Aplikasi Todo List lengkap dengan backend API (Node.js + Express + TypeScript) dan frontend (React + TypeScript + Ant Design).
@@ -61,7 +58,7 @@ CREATE DATABASE todo_app;
 Buat file `.env` di folder `backend/`:
 ```env
 DB_USER=postgres
-DB_PASSWORD=password_anda
+DB_PASSWORD=password_kamu
 DB_NAME=todo_app
 DB_HOST=localhost
 DB_PORT=5432
@@ -90,7 +87,7 @@ Backend akan berjalan di `http://localhost:5000`
 
 #### 3.1 Install Dependencies
 ```bash
-cd ../frontend
+cd frontend
 npm install
 ```
 
@@ -122,7 +119,7 @@ Frontend akan berjalan di `http://localhost:5173`
 docker-compose up -d --build
 
 # Akses aplikasi
-# Frontend: http://localhost
+# Frontend: http://localhost:5173
 # Backend: http://localhost:3000
 ```
 
@@ -269,13 +266,13 @@ CREATE INDEX idx_todos_due_date ON todos(due_date);
 @media (min-width: 768px) { ... }
 
 /* Large devices (desktops, 992px and up) */
-
+@media (min-width: 992px) { ... }
 ```
 
 **Adaptasi UI:**
 - Mobile: Single column, collapsed sidebar
 - Tablet: Two column layout
-
+- Desktop: Full layout dengan sidebar expanded
 
 **Ant Design Components:**
 - `Grid` dan `Row/Col` untuk responsive layout
@@ -288,13 +285,16 @@ CREATE INDEX idx_todos_due_date ON todos(due_date);
 **Component Hierarchy:**
 ```
 App
-├── Components
-│   ├── CategoryManager
-│   ├── Pagination
-│   └── SearchBar
-│   └── TodoForm
-│   └── TodoList
-
+├── Layout
+│   ├── Sidebar
+│   └── MainContent
+├── TodoManagement
+│   ├── TodoList
+│   ├── TodoForm
+│   └── TodoFilters
+└── CategoryManagement
+    ├── CategoryList
+    └── CategoryForm
 ```
 
 **State Management:**
@@ -329,16 +329,16 @@ interface FilterState {
 ```
 backend/
 ├── src/
-│   ├── config/         # konfigurasi database dan swagger
-│   ├── migrations/     # migrasi database
-│   ├── models/         # model database
+│   ├── config/         # Database & environment config
+│   ├── models/         # Database models
 │   ├── routes/         # API routes
-│   ├── test/           #unit testing 
-
-
+│   └── app.ts         # App initialization
+├── migrations/         # Database migrations
+├── tests/             # Unit tests
+└── package.json
 ```
 
-**Error Handling (contoh)tetapi saya gunakan di backend**
+**Error Handling:**
 ```javascript
 // Global error handler
 app.use((err, req, res, next) => {
@@ -357,9 +357,9 @@ app.use((err, req, res, next) => {
 });
 ```
 
-#### 4. Data Validation(contoh):
+#### 4. Data Validation
 
-**Backend Validation(contoh):**
+**Backend Validation:**
 ```javascript
 // Menggunakan Sequelize validation
 const Todo = sequelize.define('Todo', {
@@ -380,7 +380,7 @@ const Todo = sequelize.define('Todo', {
 });
 ```
 
-**Frontend Validation(contoh):**
+**Frontend Validation:**
 ```typescript
 // Form validation dengan Ant Design
 <Form.Item
@@ -453,25 +453,22 @@ Jika mengalami masalah saat setup, silakan:
 2. Pastikan PostgreSQL berjalan dan database dibuat
 3. Verifikasi environment variables sudah sesuai
 4. Buka issue di GitHub repository
-5. hubungi email stevcomp58@gmail.com
+5. Hubungi email: stevcomp58@gmail.com
 
 ## 📄 License
 
 MIT License
-```
 
-## 📁 File Structure yang Dibuat untuk backend dan frontend:
+## 📁 File Structure
 
 ```
 todo-app/
 ├── README.md                 # File ini (fullstack documentation)
 ├── backend/
 │   ├── README.md            # Backend-specific documentation
-│   └── ... 
+│   └── ...
 ├── frontend/
 │   ├── README.md            # Frontend-specific documentation  
-│   └── ... 
+│   └── ...
 └── docker-compose.yml
 ```
-
-Setiap bagian (backend, frontend, fullstack) memiliki README.md terpisah dengan instruksi yang detail dan spesifik untuk konteks masing-masing.
