@@ -1,4 +1,3 @@
-# README.md untuk Fullstack Todo App
 
 
 ```markdown
