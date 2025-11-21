@@ -1,6 +1,5 @@
 # README.md untuk Fullstack Todo App
 
-**File:** `README.md` (di root project)
 
 ```markdown
 # Todo App - Fullstack Application
@@ -141,7 +140,7 @@ npm run test:coverage # Dengan coverage report
 ### Frontend Tests
 ```bash
 cd frontend
-npm run lint         # Code linting
+npm run dev         # Code linting
 npm run build        # Build production
 ```
 
@@ -271,13 +270,13 @@ CREATE INDEX idx_todos_due_date ON todos(due_date);
 @media (min-width: 768px) { ... }
 
 /* Large devices (desktops, 992px and up) */
-@media (min-width: 992px) { ... }
+
 ```
 
 **Adaptasi UI:**
 - Mobile: Single column, collapsed sidebar
 - Tablet: Two column layout
-- Desktop: Full layout dengan sidebar permanen
+
 
 **Ant Design Components:**
 - `Grid` dan `Row/Col` untuk responsive layout
@@ -290,15 +289,13 @@ CREATE INDEX idx_todos_due_date ON todos(due_date);
 **Component Hierarchy:**
 ```
 App
-├── Layout
-│   ├── Header
-│   ├── Sidebar
-│   └── MainContent
-│       ├── TodoFilters
-│       ├── TodoList
-│       │   ├── TodoItem
-│       │   └── PriorityBadge
-│       └── TodoForm
+├── Components
+│   ├── CategoryManager
+│   ├── Pagination
+│   └── SearchBar
+│   └── TodoForm
+│   └── TodoList
+
 ```
 
 **State Management:**
@@ -333,15 +330,16 @@ interface FilterState {
 ```
 backend/
 ├── src/
-│   ├── controllers/    # Request handlers
-│   ├── services/       # Business logic
-│   ├── models/         # Database models
+│   ├── config/         # konfigurasi database dan swagger
+│   ├── migrations/     # migrasi database
+│   ├── models/         # model database
 │   ├── routes/         # API routes
-│   ├── middleware/     # Custom middleware
-│   └── utils/          # Helper functions
+│   ├── test/           #unit testing 
+
+
 ```
 
-**Error Handling Approach:**
+**Error Handling (contoh)tetapi saya gunakan di backend**
 ```javascript
 // Global error handler
 app.use((err, req, res, next) => {
@@ -360,9 +358,9 @@ app.use((err, req, res, next) => {
 });
 ```
 
-#### 4. Data Validation
+#### 4. Data Validation(contoh):
 
-**Backend Validation:**
+**Backend Validation(contoh):**
 ```javascript
 // Menggunakan Sequelize validation
 const Todo = sequelize.define('Todo', {
@@ -383,7 +381,7 @@ const Todo = sequelize.define('Todo', {
 });
 ```
 
-**Frontend Validation:**
+**Frontend Validation(contoh):**
 ```typescript
 // Form validation dengan Ant Design
 <Form.Item
@@ -456,23 +454,24 @@ Jika mengalami masalah saat setup, silakan:
 2. Pastikan PostgreSQL berjalan dan database dibuat
 3. Verifikasi environment variables sudah sesuai
 4. Buka issue di GitHub repository
+5. hubungi email stevcomp58@gmail.com
 
 ## 📄 License
 
 MIT License
 ```
 
-## 📁 File Structure yang Dibuat:
+## 📁 File Structure yang Dibuat untuk backend dan frontend:
 
 ```
 todo-app/
 ├── README.md                 # File ini (fullstack documentation)
 ├── backend/
 │   ├── README.md            # Backend-specific documentation
-│   └── ... (source code)
+│   └── ... 
 ├── frontend/
 │   ├── README.md            # Frontend-specific documentation  
-│   └── ... (source code)
+│   └── ... 
 └── docker-compose.yml
 ```
 
