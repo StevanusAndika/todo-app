@@ -74,19 +74,19 @@ npm run build
 frontend/
 ├── src/
 │   ├── components/
-│   │   ├── CategoryManager.tsx
-│   │   ├── Pagination.tsx
-│   │   ├── SearchBar.tsx
-│   │   ├── TodoForm.tsx
-│   │   └── TodoList.tsx
+│   │   ├── CategoryManager.tsx #Komponen kategori manager
+│   │   ├── Pagination.tsx      #Paginasi komponen
+│   │   ├── SearchBar.tsx       #Search bar komponen 
+│   │   ├── TodoForm.tsx        #Form todo  komponen
+│   │   └── TodoList.tsx        #List todo komponen 
 │   ├── services/
-│   │   └── api.ts
+│   │   └── api.ts             #fetch api
 │   ├── types/
-│   │   └── todo.ts
-│   ├── App.tsx
-│   └── main.tsx
-├── package.json
-└── tsconfig.json
+│   │   └── todo.ts #Interface to  do 
+│   ├── App.tsx     #Tempat menaruh komponen
+│   └── main.tsx    #Entry point aplikasi
+├── package.json    #Load paket 
+└── tsconfig.json  #Konfigurasi typescript
 ```
 
 ## 🎯 Komponen Utama
@@ -304,11 +304,11 @@ npm run build
 
 ### Untuk error CORS:
 1. Pastikan backend mengizinkan origin frontend
-2. Check CORS configuration di backend
+2. Check CORS konfigurasi di backend
 
 ### Untuk error koneksi database:
 1. Pastikan PostgreSQL berjalan
-2. Check connection string di backend
+2. Cek koneksi string di backend
 3. Verifikasi migrations sudah dijalankan
 
 ---

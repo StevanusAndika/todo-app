@@ -135,7 +135,7 @@ npm run test:coverage # Dengan laporan coverage
 ### Tests Frontend
 ```bash
 cd frontend
-npm run dev         # Code linting
+npm run dev         # run development
 npm run build        # Build production
 ```
 
@@ -324,7 +324,7 @@ interface FilterState {
 ```
 backend/
 ├── src/
-│   ├── config/         # Konfigurasi database & environment
+│   ├── config/         # Konfigurasi database dan swagger
 │   ├── migrations/     # Migrasi database
 │   ├── models/         # Model database
 │   ├── routes/         # Rute API

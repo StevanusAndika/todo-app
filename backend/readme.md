@@ -213,19 +213,19 @@ npm run test:health
 backend/
 ├── src/
 │   ├── config/
-│   │   ├── database.js      # Database configuration
-│   │   └── swagger.ts       # Swagger documentation
+│   │   ├── database.js      # Konfigurasi database
+│   │   └── swagger.ts       # Dokumentasi  swagger
 │   ├── migrations/          # Database migrations
-│   ├── models/              # Sequelize models
-│   ├── routes/              # API routes
-│   ├── tests/               # Test files
+│   ├── models/              # Models database(sequelize )
+│   ├── routes/              # Rute API
+│   ├── tests/               # Unit test
 │   │   ├── categories.test.ts
 │   │   ├── todos.test.ts
 │   │   └── health.test.ts
-│   └── app.ts              # Main application file
-├── dist/                   # Compiled JavaScript files
-├── .env                    # Environment variables
-├── .sequelizerc           # Sequelize configuration
+│   └── app.ts              # File utama 
+├── dist/                   # Hasil build
+├── .env                    # Enviroment variabel
+├── .sequelizerc           # Sequelize konfigurasi
 └── package.json
 ```
 
