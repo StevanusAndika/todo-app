@@ -6,14 +6,14 @@
   "scripts": {
     "dev": "nodemon src/app.ts",
     "build": "tsc",
-    "start": "node dist/app.js",
+    "start": "node dist/src/api/index.js",
     "migrate:create": "sequelize-cli migration:generate",
     "migrate:up": "sequelize-cli db:migrate",
     "migrate:down": "sequelize-cli db:migrate:undo",
     "migrate:reset": "sequelize-cli db:migrate:undo:all",
     "seed:create": "sequelize-cli seed:generate",
     "seed:up": "sequelize-cli db:seed:all",
-     "test": "jest",
+    "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
     "test:categories": "jest src/tests/categories.test.ts",
@@ -23,6 +23,7 @@
     "vercel-start": "npm start"
   },
   "dependencies": {
+    "@vercel/node": "^5.5.9",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
@@ -38,7 +39,7 @@
     "@types/cors": "^2.8.19",
     "@types/express": "^4.17.17",
     "@types/jest": "^30.0.0",
-    "@types/node": "^20.4.5",
+    "@types/node": "^20.19.25",
     "@types/supertest": "^6.0.3",
     "@types/swagger-jsdoc": "^6.0.4",
     "@types/swagger-ui-express": "^4.1.8",

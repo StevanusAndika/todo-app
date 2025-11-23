@@ -18,7 +18,8 @@
     "baseUrl": "./src",
     "paths": {
       "@/*": ["*"]
-    }
+    },
+    "types": ["node", "@vercel/node"]
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "dist"]
