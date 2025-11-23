@@ -5,7 +5,7 @@
   "main": "dist/app.js",
   "scripts": {
     "dev": "nodemon src/app.ts",
-    "build": "tsc",
+    "build": "tsc && npm run migrate:up",
     "start": "node dist/app.js",
     "migrate:create": "sequelize-cli migration:generate",
     "migrate:up": "sequelize-cli db:migrate",
@@ -18,7 +18,9 @@
     "test:coverage": "jest --coverage",
     "test:categories": "jest src/tests/categories.test.ts",
     "test:todos": "jest src/tests/todos.test.ts",
-    "test:health": "jest src/tests/health.test.ts"
+    "test:health": "jest src/tests/health.test.ts",
+    "vercel-build": "npm run build",
+    "vercel-start": "npm start"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
