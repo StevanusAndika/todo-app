@@ -13,10 +13,5 @@
     }
   ],
   "buildCommand": "npm install",
-  "installCommand": "npm install",
-  "functions": {
-    "src/app.ts": {
-      "includeFiles": "src/**"
-    }
-  }
+  "installCommand": "npm install"
 }
