@@ -1,6 +1,7 @@
 import React from 'react';
 import { List, Card, Tag, Button, Space, Switch, Typography, Empty } from 'antd';
 import { EditOutlined, DeleteOutlined, CalendarOutlined } from '@ant-design/icons';
+import Swal from 'sweetalert2';
 import type { Todo } from '../types';
 import { useTodo } from '../contexts/TodoContext';
 
@@ -31,6 +32,29 @@ const TodoList: React.FC<TodoListProps> = ({ onEdit }) => {
       day: 'numeric',
       month: 'short',
       year: 'numeric'
+    });
+  };
+
+  const handleDelete = (todo: Todo) => {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: `You are about to delete "${todo.title}". This action cannot be undone!`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'Cancel',
+      reverseButtons: true
+    }).then((result) => {
+      if (result.isConfirmed) {
+        deleteTodo(todo.id);
+        Swal.fire(
+          'Deleted!',
+          'Your todo has been deleted.',
+          'success'
+        );
+      }
     });
   };
 
@@ -116,7 +140,7 @@ const TodoList: React.FC<TodoListProps> = ({ onEdit }) => {
                     type="text"
                     danger
                     icon={<DeleteOutlined />}
-                    onClick={() => deleteTodo(todo.id)}
+                    onClick={() => handleDelete(todo)}
                   />
                 </Space>
               </div>
