@@ -112,13 +112,8 @@ dotenv.config();
 
 const app = express();
 
-<<<<<<< HEAD
-//  CORS IMPLEMENTATION - TANPA MENGUBAH KODE LAIN
-app.use(cors()); 
-=======
 // ✅ CORS IMPLEMENTATION
 app.use(cors());
->>>>>>> 12c679229295f8d43c1dd4071b70888abcada955
 app.use(express.json());
 
 // Swagger Documentation
