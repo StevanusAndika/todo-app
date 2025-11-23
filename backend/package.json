@@ -5,7 +5,7 @@
   "main": "dist/app.js",
   "scripts": {
     "dev": "nodemon src/app.ts",
-    "build": "tsc && npm run migrate:up",
+    "build": "tsc",
     "start": "node dist/app.js",
     "migrate:create": "sequelize-cli migration:generate",
     "migrate:up": "sequelize-cli db:migrate",
